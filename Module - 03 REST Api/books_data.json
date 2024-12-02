@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Fiction",
+    "pages": 281,
+    "language": "English",
+    "description": "A novel about the serious issues of race, inequality, and segregation through the eyes of young Scout Finch.",
+    "price": 1099
+  },
+  {
+    "id": 2,
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian",
+    "pages": 328,
+    "language": "English",
+    "description": "A chilling dystopian novel about the dangers of totalitarianism.",
+    "price": 870
+  },
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Classic",
+    "pages": 180,
+    "language": "English",
+    "description": "A tragic story of love, wealth, and the American Dream.",
+    "price": 5000,
+    "id": 4
+  }
+]
