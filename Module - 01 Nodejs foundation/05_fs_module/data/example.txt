@@ -1,0 +1,2 @@
+Example of creating a file.
+This content added using append method.

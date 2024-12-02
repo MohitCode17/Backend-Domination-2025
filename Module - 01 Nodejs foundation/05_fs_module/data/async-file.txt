@@ -1,0 +1,2 @@
+This is async way of create a file.
+This is another line added by async append method.
