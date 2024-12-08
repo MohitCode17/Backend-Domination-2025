@@ -97,5 +97,48 @@ export const loginUser = async (req, res) => {
   }
 };
 
+// Change password controller
+export const changePassword = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+
+    if (!user)
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+
+    const { oldPassword, newPassword } = req.body;
+
+    // Check if old password is match
+    const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isPasswordMatch)
+      return res.status(400).json({
+        success: false,
+        message: "Old password is not correct! Please try again",
+      });
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update new password
+    user.password = hashPassword;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Unable to change password! Please try again",
+    });
+  }
+};
+
 // Logout user controller
 export const logoutUser = async (req, res) => {};
