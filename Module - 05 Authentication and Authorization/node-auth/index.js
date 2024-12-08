@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";
 import homeRoute from "./routes/home.route.js";
 import adminRoute from "./routes/admin.route.js";
+import imageRoutes from "./routes/image.route.js";
 import { connectDB } from "./database/db.js";
 
 const app = express();
@@ -26,5 +27,6 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/home", homeRoute);
 app.use("/api/admin", adminRoute);
+app.use("/api/image", imageRoutes);
 
 app.listen(port, () => console.log(`Server running at port: ${port}`));
