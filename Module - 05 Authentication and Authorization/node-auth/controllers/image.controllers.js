@@ -38,6 +38,41 @@ export const uploadImage = async (req, res) => {
   }
 };
 
+// Fetch images - Pagination, Sorting...
+export const fetchImages = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1; // Current page user selected
+    const limit = parseInt(req.query.limit) || 5; // No. of image you want to show per page
+    const skip = (page - 1) * limit; // No of images you'll skip when clicking on page 2, 3 or 4 etc.
+
+    const sortBy = req.query.sortBy || "createdAt";
+    const sortOrder = req.query.sortOrder === "asc" ? 1 : -1;
+
+    const totalImages = await Image.countDocuments();
+    const totalPages = Math.ceil(totalImages / limit);
+
+    const sortObj = {};
+    sortObj[sortBy] = sortOrder;
+
+    const images = await Image.find().sort(sortObj).skip(skip).limit(limit);
+
+    if (images) {
+      res.status(200).json({
+        success: true,
+        currentPage: page,
+        totalPages: totalPages,
+        totalImages: totalImages,
+        data: images,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Unable to get images, Please try again",
+    });
+  }
+};
+
 // Delete image controller
 export const deleteImage = async (req, res) => {
   const imageId = req.params.id;
