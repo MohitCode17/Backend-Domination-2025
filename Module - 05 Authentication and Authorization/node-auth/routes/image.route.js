@@ -1,5 +1,5 @@
 import express from "express";
-import { uploadImage } from "../controllers/image.controllers.js";
+import { deleteImage, uploadImage } from "../controllers/image.controllers.js";
 import { checkAuth } from "../middlewares/auth_middleware.js";
 import { checkAdminAccess } from "../middlewares/admin_auth_middleware.js";
 import upload from "../middlewares/image_upload.js";
@@ -14,5 +14,8 @@ router.post(
   upload.single("image"),
   uploadImage
 );
+
+// Delete Image (Admin Access - Private Route)
+router.delete("/:id", checkAuth, checkAdminAccess, deleteImage);
 
 export default router;
